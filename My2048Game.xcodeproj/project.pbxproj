@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		440DAC542EBFEF89001EB15C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 440DAC522EBFEF80001EB15C /* .gitignore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		440DAC272EBFE336001EB15C /* My2048Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = My2048Game.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		440DAC522EBFEF80001EB15C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -34,6 +39,7 @@
 			children = (
 				440DAC292EBFE336001EB15C /* My2048Game */,
 				440DAC282EBFE336001EB15C /* Products */,
+				440DAC522EBFEF80001EB15C /* .gitignore */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,6 +115,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				440DAC542EBFEF89001EB15C /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
