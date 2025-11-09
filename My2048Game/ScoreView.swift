@@ -6,24 +6,26 @@
 //
 import SwiftUI
 
-/// A view for displaying a single score (Current or Best).
 struct ScoreView: View {
     let title: String
     let score: Int
-    
+
     var body: some View {
-        VStack {
+        VStack(spacing: 4) {
             Text(title)
                 .font(.system(size: 14, weight: .bold))
                 .foregroundColor(Color(hex: "eee4da"))
-            Text(String(score))
-                .font(.system(size: 24, weight: .bold))
+            Text("\(score)")
+                .font(.system(size: 20, weight: .heavy))
                 .foregroundColor(.white)
+                .minimumScaleFactor(0.5)
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 5)
+        .frame(width: 80, height: 80) // 🟫 make square like logo
         .background(Color(hex: "bbada0"))
-        .cornerRadius(6)
+        .cornerRadius(8)
+        .shadow(radius: 2)
     }
 }
+
+
 

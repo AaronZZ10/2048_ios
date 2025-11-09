@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct My2048GameApp: App {
+struct GameApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

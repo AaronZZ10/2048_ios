@@ -1,27 +1,23 @@
-//
-//  Untitled.swift
-//  My2048Game
-//
-//  Created by Hao Liu on 11/8/25.
-//
-
 import SwiftUI
 
 /// Displays a single tile on the board.
 struct TileView: View {
-    let value: Int
+    let tile: Tile // Changed from `value: Int`
+    
+    // New @State for managing the pop animation
+    @State private var scale: CGFloat = 1.0
     
     // Dynamically get colors based on the tile value
     private var backgroundColor: Color {
-        return tileColors[value, default: Color(hex: "cdc1b4")]
+        return tileColors[tile.value, default: Color(hex: "cdc1b4")]
     }
     
     private var foregroundColor: Color {
-        return (value == 2 || value == 4) ? Color(hex: "776e65") : .white
+        return (tile.value == 2 || tile.value == 4) ? Color(hex: "776e65") : .white
     }
     
     private var fontSize: CGFloat {
-        switch value {
+        switch tile.value {
         case 0...64: return 36
         case 128...512: return 32
         case 1024...2048: return 24
@@ -36,14 +32,35 @@ struct TileView: View {
             .overlay(
                 // Show number only if value is not 0
                 Group {
-                    if value > 0 {
-                        Text(String(value))
+                    if tile.value > 0 {
+                        Text(String(tile.value))
                             .font(.system(size: fontSize, weight: .bold))
                             .foregroundColor(foregroundColor)
                             .minimumScaleFactor(0.5) // Allow text to shrink
                     }
                 }
             )
+            // --- This is the new animation part ---
+            .scaleEffect(scale) // Use the @State variable
+            .onAppear {
+                // This closure fires when the TileView appears on screen.
+                
+                if tile.isNewlyMerged {
+                    // This is a merged tile.
+                    // Start with a "pop"
+                    scale = 1.2
+                    // After 0.1s, animate back to normal.
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        withAnimation(.spring(response: 0.1, dampingFraction: 0.6)) {
+                            scale = 1.0
+                        }
+                    }
+                } else {
+                    // This is a brand new (non-merged) tile.
+                    // The transition in ContentView handles its scale-in.
+                    scale = 1.0
+                }
+            }
     }
     
     // --- Tile Color Map ---
@@ -59,7 +76,8 @@ struct TileView: View {
         256: Color(hex: "edcc61"),
         512: Color(hex: "edc850"),
         1024: Color(hex: "edc53f"),
-        2048: Color(hex: "edc22e")
+        2048: Color(hex: "edc22e"),
+        4096: Color(hex: "800000")
     ]
 }
 
